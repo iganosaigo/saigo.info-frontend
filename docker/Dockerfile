@@ -16,7 +16,7 @@ FROM nginx:1.25-alpine-slim
 COPY --from=build /app/build /usr/share/nginx/html
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
-RUN mkdir -p /tmp/nginx && \
-    chown -R nginx:nginx /tmp/nginx
+RUN chown nginx:root /var/run && \
+    chmod 0770 /var/run
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
